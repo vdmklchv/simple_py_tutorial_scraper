@@ -14,7 +14,11 @@ def retrieve_content(url: str) -> BeautifulSoup:
 path = pathlib.Path("/Users/vdmclcv/bs4tests")
 if path.exists():
     file = path / "python_doc.txt"
-    pathlib.Path.touch(file)
+    if file.exists():
+        with open(file, "w") as old_file:
+            old_file.truncate()
+    else:
+        pathlib.Path.touch(file)
 
 # get links from index page
 index_page_soup = retrieve_content("https://docs.python.org/3/tutorial/")
