@@ -29,7 +29,9 @@ for entry in links_bs4_filtered:
     url_soup = retrieve_content(entry_url)
     # fetch section text in URL content
     section_text = url_soup.select("div.section")[0].get_text()
+    amended_section_text = section_text.replace('â', "'")
+    amended_section_text = amended_section_text.replace('Â¶', "")
     # open file for writing
     with open(file, 'a') as target_file:
-        target_file.write(section_text)
+        target_file.write(amended_section_text)
         target_file.write('\n\n\n')
